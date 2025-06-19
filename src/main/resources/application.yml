@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:todoapp}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASS:postgres}
+  jpa:
+    hibernate:
+      ddl-auto: update  # ★備忘録：開発中はupdate推奨。構造変更が多い場合はcreateを一時的に使う。
+                       # 本番はvalidateにして、DB構造が正しいかだけをチェック。自動変更はNG。
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: public  # ←必要ならスキーマを明示
+
+logging:
+  file:
+    name: ${LOG_FILE_NAME:kachikachi_scorer.log}
